@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TERMINAL_HACK_V2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&display=swap');
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Ransomware Animation Styles */
+        .blink-bg { animation: redFlash 1.5s infinite; }
+        @keyframes redFlash {
+            0% { background-color: #000; }
+            50% { background-color: #300; }
+            100% { background-color: #000; }
+        }
+
+        .glitch { position: relative; color: #ff0000; }
+        .glitch::before {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            text-shadow: 1px 0 blue;
+            background: black;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-1 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes noise-1 {
+            0% { clip: rect(20px, 9999px, 40px, 0); }
+            100% { clip: rect(80px, 9999px, 100px, 0); }
+        }
+
+        .vibrate { animation: shake 0.1s infinite; }
+        @keyframes shake {
+            0% { transform: translate(2px, 2px); }
+            50% { transform: translate(-2px, -2px); }
+            100% { transform: translate(2px, -2px); }
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-start p-6">
+
+    <!-- HALAMAN 1: TOOLS HACK AKUN -->
+    <div id="hack-tool-ui" class="w-full max-w-md flex flex-col items-center pt-10">
+        <div class="mb-6 text-green-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0a.5.5 0 0 1 .5.5v.757l.33.159a3.5 3.5 0 0 1 1.833 2.466l.122.631 1.047 1.048a3.5 3.5 0 0 1 .97 3.078l-.113.729.477.717a3.5 3.5 0 0 1 .591 2.328l-.045.687a3.3 3.3 0 0 1-3.636 3.088l-.408-.044-.43.86a.5.5 0 0 1-.894 0l-.43-.86-.408.044a3.3 3.3 0 0 1-3.636-3.088l-.045-.687a3.5 3.5 0 0 1 .591-2.328l.477-.717-.113-.73a3.5 3.5 0 0 1 .97-3.077l1.047-1.048.122-.63a3.5 3.5 0 0 1 1.833-2.466l.33-.159V.5A.5.5 0 0 1 8 0z"/>
+            </svg>
+        </div>
+        <h1 class="text-xl font-black text-green-500 mb-2 uppercase tracking-widest text-center">Account Bypass Tool v2.1</h1>
+        <p class="text-[10px] text-gray-500 mb-8 text-center italic">Masukkan detail target untuk memulai eksploitasi server.</p>
+
+        <div class="w-full space-y-4 bg-zinc-900/50 p-6 border border-zinc-800 rounded-lg">
+            <div>
+                <label class="block text-[10px] text-green-700 uppercase font-bold mb-1">Email / Username Target:</label>
+                <input type="text" id="targetEmail" placeholder="example@mail.com" class="w-full bg-black border border-zinc-700 p-3 text-sm text-green-400 focus:border-green-500 focus:outline-none">
+            </div>
+            <div>
+                <label class="block text-[10px] text-green-700 uppercase font-bold mb-1">Platform Akun:</label>
+                <select id="platformType" class="w-full bg-black border border-zinc-700 p-3 text-sm text-green-400 focus:border-green-500 focus:outline-none">
+                    <option>Instagram</option>
+                    <option>Facebook</option>
+                    <option>TikTok</option>
+                    <option>Google / Gmail</option>
+                </select>
+            </div>
+            <button onclick="triggerRansomware()" class="w-full bg-green-600 hover:bg-green-500 text-black font-black py-4 mt-2 text-xs uppercase tracking-widest transition-all">
+                Mulai Hack Akun
+            </button>
+        </div>
+        <p class="mt-6 text-[8px] text-zinc-600 uppercase text-center font-bold italic">Disclaimer: Gunakan dengan bijak. Kami tidak bertanggung jawab atas penyalahgunaan tools ini.</p>
+    </div>
+
+    <!-- HALAMAN 2: RANSOMWARE (HIDDEN DEFAULT) -->
+    <div id="ransomware-ui" class="hidden w-full flex-col items-center justify-start">
+        <div class="mt-8 mb-6 text-red-600 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+        </div>
+
+        <h1 class="text-3xl font-black mb-2 glitch uppercase tracking-tighter text-center" data-text="PERANGKAT TERKUNCI">PERANGKAT TERKUNCI</h1>
+        <p class="text-[10px] text-gray-400 mb-8 font-bold italic text-center">SISA PERCOBAAN: <span id="tries-count" class="text-red-600 bg-red-900/20 px-2 border border-red-600">3</span></p>
+
+        <div class="w-full bg-black/80 border-2 border-red-600 p-4 mb-8 max-w-md shadow-[0_0_20px_rgba(255,0,0,0.5)]">
+            <h2 class="text-red-500 font-black text-sm mb-2 border-b border-red-900 pb-1 uppercase">PESAN DARI PENGIRIM:</h2>
+            <p class="text-xs leading-relaxed text-gray-200">
+                "Semua dokumen, foto, database, dan file penting Anda telah dienkripsi dengan algoritma AES-256. Mencoba melakukan reset atau menghapus aplikasi ini akan memicu penghapusan kunci permanen. Data Anda akan aman jika Anda mengikuti instruksi kami."
+            </p>
+        </div>
+
+        <div class="w-full max-w-xs mb-8">
+            <label class="block text-[10px] uppercase font-black mb-2 text-red-500">Masukkan Kunci Dekripsi:</label>
+            <input type="text" id="unlockCode" placeholder="XXXX-XXXX-XXXX" class="w-full bg-black border-2 border-gray-800 p-3 text-center font-black tracking-widest text-red-500 placeholder-gray-800 transition-all">
+            <button onclick="checkCode()" class="w-full bg-red-600 text-black font-black py-3 mt-4 hover:bg-white transition-colors uppercase text-sm">DEKRIPSI SEKARANG</button>
+        </div>
+
+        <div class="w-full max-w-sm text-center mb-8">
+            <p class="text-[10px] text-gray-500 mb-4 uppercase font-bold text-center">Langkah-langkah Pemulihan:</p>
+            <div class="flex flex-col gap-2">
+                <div class="bg-gray-900/50 p-3 border border-gray-800 rounded">
+                    <p class="text-[9px] font-bold text-white mb-1 uppercase tracking-wider">Langkah 1: Hubungi Admin</p>
+                    <p class="text-[10px] text-blue-400">Whatsapp: +6287812483476</p>
+                </div>
+                <div class="bg-gray-900/50 p-3 border border-gray-800 rounded">
+                    <p class="text-[9px] font-bold text-white mb-1 uppercase tracking-wider">Langkah 2: Kirim ID Perangkat</p>
+                    <p class="text-[10px] text-gray-400 italic text-center">ID Perangkat: #XP-992-SECURE-88</p>
+                </div>
+                <div class="bg-gray-900/50 p-3 border border-gray-800 rounded">
+                    <p class="text-[9px] font-bold text-white mb-1 uppercase tracking-wider">Langkah 3: Dekripsi Data</p>
+                    <p class="text-[10px] text-yellow-500 text-center">Masukkan kode untuk mengembalikan semua file.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-10 w-full text-center">
+            <p class="text-[8px] text-red-900 font-black animate-pulse uppercase tracking-widest text-center">SISTEM MONITORING AKTIF - JANGAN MATIKAN INTERNET</p>
+        </div>
+    </div>
+
+    <!-- OVERLAYS (DELETE & DEAD SCREEN) -->
+    <div id="delete-screen" class="fixed inset-0 bg-black z-[2000] hidden flex flex-col p-8 font-mono overflow-hidden">
+        <h2 class="text-red-600 font-black text-xl mb-6 animate-pulse uppercase italic">Menghapus Partisi Data...</h2>
+        <div id="log-container" class="text-[10px] text-green-500 space-y-1"></div>
+    </div>
+
+    <div id="dead-screen" class="fixed inset-0 bg-black z-[3000] hidden flex flex-col items-center justify-center p-10 text-center">
+        <div class="w-full max-w-xs text-gray-700 font-mono text-[10px] space-y-2">
+            <p>> Booting from primary disk...</p>
+            <p>> Checking sectors... [FAILED]</p>
+            <p class="text-red-900 font-black mt-4">> ERROR: NO OPERATING SYSTEM FOUND.</p>
+            <p class="text-red-900 font-black">> ACCESS NOT FOUND.</p>
+            <p class="text-gray-900 mt-8 animate-pulse">> System halted_</p>
+        </div>
+    </div>
+
+    <div id="successModal" class="fixed inset-0 bg-green-600 z-[4000] hidden flex items-center justify-center p-6 text-center text-center">
+        <div class="bg-black p-8 text-green-500 border-4 border-white shadow-2xl max-w-sm">
+            <h3 class="text-3xl font-black mb-4">DEKRIPSI BERHASIL</h3>
+            <p class="text-sm uppercase leading-relaxed">Keamanan perangkat telah dipulihkan. Seluruh file Anda telah didekripsi kembali.</p>
+            <button onclick="location.reload()" class="bg-green-600 text-black px-10 py-3 mt-8 font-black uppercase text-xs">RESTART SEKARANG</button>
+        </div>
+    </div>
+
+    <script>
+        let tries = 3;
+        const folders = ["/DCIM/Camera/", "/WhatsApp/Databases/", "/m-Banking/Tokens/", "/Gallery/Private/", "/Android/obb/system/"];
+
+        function requestFullScreen() {
+            const docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen().catch(() => {});
+            } else if (docElm.webkitRequestFullScreen) {
+                docElm.webkitRequestFullScreen().catch(() => {});
+            }
+            // Mencoba mengunci orientasi jika didukung
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock('portrait').catch(() => {});
+            }
+        }
+
+        async function triggerRansomware() {
+            const email = document.getElementById('targetEmail').value;
+            if (!email) {
+                alert("Masukkan email target terlebih dahulu!");
+                return;
+            }
+
+            // Memasuki Mode Full Screen
+            requestFullScreen();
+
+            // Transisi ke Ransomware UI
+            document.getElementById('hack-tool-ui').classList.add('hidden');
+            const rUI = document.getElementById('ransomware-ui');
+            rUI.classList.remove('hidden');
+            rUI.classList.add('flex');
+            
+            // Mengubah latar belakang menjadi berkedip merah
+            document.body.classList.add('blink-bg');
+            
+            // Scroll ke atas otomatis
+            window.scrollTo(0,0);
+        }
+
+        function checkCode() {
+            const code = document.getElementById('unlockCode').value.toUpperCase();
+            if (code === 'HACK BY 54CH4N' || code === 'PRANK_OVER') {
+                document.getElementById('successModal').classList.remove('hidden');
+                return;
+            }
+
+            tries--;
+            document.getElementById('tries-count').innerText = tries;
+            document.body.classList.add('vibrate');
+            setTimeout(() => document.body.classList.remove('vibrate'), 500);
+
+            if (tries <= 0) {
+                startDestruction();
+            } else {
+                document.getElementById('unlockCode').value = '';
+                document.getElementById('unlockCode').placeholder = "KODE SALAH!";
+                document.getElementById('unlockCode').style.borderColor = "#f00";
+            }
+        }
+
+        async function startDestruction() {
+            document.body.style.overflow = "hidden";
+            document.getElementById('delete-screen').classList.remove('hidden');
+            document.body.classList.add('vibrate');
+            
+            const log = document.getElementById('log-container');
+            for (let i = 0; i < 40; i++) {
+                const p = document.createElement('p');
+                const file = folders[Math.floor(Math.random() * folders.length)] + "secret_data_" + i + ".encrypted";
+                p.innerHTML = `<span class="text-red-600">[DELETED]</span> ${file}... OK`;
+                log.prepend(p);
+                if (i % 8 === 0) {
+                    const critical = document.createElement('p');
+                    critical.className = "text-white bg-red-800 font-bold px-1";
+                    critical.innerText = `CRITICAL: ERAISING_MBR_SECTOR_${i * 2.5}`;
+                    log.prepend(critical);
+                }
+                await new Promise(r => setTimeout(r, 90));
+            }
+            setTimeout(() => {
+                document.getElementById('dead-screen').classList.remove('hidden');
+                document.body.classList.remove('vibrate');
+            }, 400);
+        }
+    </script>
+</body>
+</html>
+
